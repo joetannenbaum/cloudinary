@@ -20,7 +20,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "JoeTannenbaum\\Cloudinary\\Providers\\ServiceProvider"
+                "JoeTannenbaum\\Cloudinary\\Laravel\\Providers\\ServiceProvider"
             ]
         }
     }
