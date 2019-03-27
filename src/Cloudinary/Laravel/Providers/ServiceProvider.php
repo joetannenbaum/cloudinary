@@ -48,7 +48,7 @@ class ServiceProvider extends BaseServiceProvider
                     . "ltrim("
                         . "config('cloudinary.base_folder') . '/' . $public_id"
                     . ", '/'), "
-                    . "array_merge(config('cloudinary.default_params'), $params)); ?>";
+                    . "array_merge(config('cloudinary.default_params', []), $params)); ?>";
         });
     }
 }
