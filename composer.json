@@ -23,5 +23,10 @@
                 "JoeTannenbaum\\Cloudinary\\Laravel\\Providers\\ServiceProvider"
             ]
         }
+    },
+    "scripts": {
+        "post-package-install": [
+            "@php artisan cloudinary:setup"
+        ]
     }
 }
