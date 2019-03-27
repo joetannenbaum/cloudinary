@@ -4,7 +4,6 @@ namespace JoeTannenbaum\Cloudinary\Laravel\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use JoeTannenbaum\Cloudinary\Laravel\Console\Commands\CloudinarySetup;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -36,12 +35,6 @@ class ServiceProvider extends BaseServiceProvider
                 __DIR__ . '/../config/cloudinary.php' => config_path('cloudinary.php'),
         ]);
 
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                CloudinarySetup::class,
-            ]);
-        }
-
         Blade::directive('cloudinary', function ($expression) {
             $parts = collect(explode(',', $expression))->map(function ($part) {
                 return trim($part);
@@ -53,7 +46,7 @@ class ServiceProvider extends BaseServiceProvider
 
             return "<?php echo cloudinary_url("
                     . "ltrim("
-                        . "config('cloudinary.base_folder') . '/' . $public_id"
+                        . "trim(config('cloudinary.base_folder'), '/') . '/' . $public_id"
                     . ", '/'), "
                     . "array_merge(config('cloudinary.default_params', []), $params)); ?>";
         });

@@ -6,5 +6,5 @@ return [
         'secure'       => true,
         'fetch_format' => 'auto',
     ],
-    'base_folder' => '',
+    'base_folder' => env('CLOUDINARY_BASE_FOLDER', ''),
 ];
