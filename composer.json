@@ -1,0 +1,27 @@
+{
+    "name": "joetannenbaum/cloudinary",
+    "description": "Some common sense quick defaults for Cloudinary usage",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joe Tannenbaum",
+            "email": "joe@joe.codes"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "JoeTannenbaum\\Cloudinary\\": "src/Cloudinary"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "cloudinary/cloudinary_php": "dev-master"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "JoeTannenbaum\\Cloudinary\\Providers\\ServiceProvider"
+            ]
+        }
+    }
+}
