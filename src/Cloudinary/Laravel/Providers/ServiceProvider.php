@@ -14,6 +14,11 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/cloudinary.php',
+            'cloudinary'
+        );
+
         if (config('cloudinary.url')) {
             \Cloudinary::config_from_url(config('cloudinary.url'));
         }
@@ -26,6 +31,10 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function boot()
     {
+        $this->publishes([
+                __DIR__ . '/../config/cloudinary.php' => config_path('cloudinary.php'),
+        ]);
+
         Blade::directive('cloudinary', function ($expression) {
             $parts = collect(explode(',', $expression))->map(function ($part) {
                 return trim($part);
