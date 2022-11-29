@@ -1,7 +1,5 @@
 <?php
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
-
 namespace JoeTannenbaum\Cloudinary\Laravel\Providers;
 
 use Cloudinary\Configuration\Configuration;
