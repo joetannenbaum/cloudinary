@@ -45,7 +45,7 @@ class ServiceProvider extends BaseServiceProvider
 
             $params = $parts->implode(',') ?: '[]';
 
-            return "<?php echo \Cloudinary\Cloudinary::cloudinary_url("
+            return "<?php echo \Cloudinary\Asset\Media::fromParams("
                 . "ltrim("
                 . "trim(config('cloudinary.base_folder'), '/') . '/' . $public_id"
                 . ", '/'), "
