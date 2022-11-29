@@ -1,7 +1,10 @@
 <?php
 
+require_once __DIR__ . '/../../../vendor/autoload.php';
+
 namespace JoeTannenbaum\Cloudinary\Laravel\Providers;
 
+use Cloudinary\Configuration\Configuration;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
@@ -20,7 +23,7 @@ class ServiceProvider extends BaseServiceProvider
         );
 
         if (config('cloudinary.url')) {
-            \Cloudinary::config_from_url(config('cloudinary.url'));
+            Configuration::instance(config('cloudinary.url'));
         }
     }
 
@@ -32,7 +35,7 @@ class ServiceProvider extends BaseServiceProvider
     public function boot()
     {
         $this->publishes([
-                __DIR__ . '/../config/cloudinary.php' => config_path('cloudinary.php'),
+            __DIR__ . '/../config/cloudinary.php' => config_path('cloudinary.php'),
         ]);
 
         Blade::directive('cloudinary', function ($expression) {
@@ -44,11 +47,11 @@ class ServiceProvider extends BaseServiceProvider
 
             $params = $parts->implode(',') ?: '[]';
 
-            return "<?php echo cloudinary_url("
-                    . "ltrim("
-                        . "trim(config('cloudinary.base_folder'), '/') . '/' . $public_id"
-                    . ", '/'), "
-                    . "array_merge(config('cloudinary.default_params', []), $params)); ?>";
+            return "<?php echo \Cloudinary\Cloudinary::cloudinary_url("
+                . "ltrim("
+                . "trim(config('cloudinary.base_folder'), '/') . '/' . $public_id"
+                . ", '/'), "
+                . "array_merge(config('cloudinary.default_params', []), $params)); ?>";
         });
     }
 }
